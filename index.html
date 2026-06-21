@@ -564,7 +564,8 @@
         const guide = CONFIG.guides.find(g => g.id === sectionId);
 
         // Redirect to registration page if not registered yet
-        if (!registered && guide) {
+        const isUserRegisteredForJournal = guide && guide.id === "2" && localStorage.getItem('isLoggedIn') === 'true';
+        if (!registered && guide && !isUserRegisteredForJournal) {
             window.location.href = `register.html?id=${sectionId}`;
         }
 
@@ -622,7 +623,7 @@
                             </div>
                         </div>
 
-                        <a href="${guide.driveLink}" target="_blank" class="btn-prime" id="${guide.ctaId}" style="width: 100%; text-align: center;">
+                        <a href="${guide.id === '2' ? 'execution-journal.html' : guide.driveLink}" ${guide.id === '2' ? '' : 'target="_blank"'} class="btn-prime" id="${guide.ctaId}" style="width: 100%; text-align: center;">
                             Unlock & Open PDF
                         </a>
                     </div>

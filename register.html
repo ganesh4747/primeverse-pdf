@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/login.png">
     <title>PrimeVerse | Register for Access</title>
-    
+
     <!-- Google Fonts & Satoshi -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
-    
+
     <!-- CSS Styles -->
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="config.js"></script>
@@ -78,7 +79,7 @@
 
         /* Price tag container */
         .price-badge-container {
-            background: linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(212,175,55,0.05) 100%);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.05) 100%);
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 50px;
             padding: 1.1rem 2.8rem;
@@ -101,12 +102,10 @@
             left: -150%;
             width: 80px;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.3) 50%,
-                rgba(255, 255, 255, 0) 100%
-            );
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.3) 50%,
+                    rgba(255, 255, 255, 0) 100%);
             transform: skewX(-20deg);
             animation: badge-shine 3.5s infinite ease-in-out;
             pointer-events: none;
@@ -116,7 +115,9 @@
             0% {
                 left: -150%;
             }
-            45%, 100% {
+
+            45%,
+            100% {
                 left: 150%;
             }
         }
@@ -126,6 +127,7 @@
                 box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), 0 0 15px rgba(212, 175, 55, 0.2), inset 0 0 8px rgba(212, 175, 55, 0.05);
                 border-color: rgba(212, 175, 55, 0.3);
             }
+
             100% {
                 box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 35px rgba(212, 175, 55, 0.65), inset 0 0 15px rgba(212, 175, 55, 0.2);
                 border-color: rgba(212, 175, 55, 0.7);
@@ -180,7 +182,7 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             border-color: rgba(212, 175, 55, 0.3);
         }
-        
+
         .price-badge-container.discount-applied .price-badge-label {
             font-size: 0.90rem;
             letter-spacing: 1px;
@@ -191,10 +193,13 @@
         }
 
         @keyframes smooth-blink {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
                 text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
             }
+
             50% {
                 opacity: 0.35;
                 text-shadow: 0 0 2px rgba(212, 175, 55, 0.1);
@@ -205,9 +210,11 @@
             0% {
                 box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
             }
+
             70% {
                 box-shadow: 0 0 0 6px rgba(212, 175, 55, 0);
             }
+
             100% {
                 box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
             }
@@ -346,7 +353,7 @@
             border-color: var(--gold);
         }
 
-        .checkbox-container input:checked + .custom-checkmark {
+        .checkbox-container input:checked+.custom-checkmark {
             background: var(--gold);
             border-color: var(--gold);
         }
@@ -359,7 +366,7 @@
             display: none;
         }
 
-        .checkbox-container input:checked + .custom-checkmark svg {
+        .checkbox-container input:checked+.custom-checkmark svg {
             display: block;
         }
 
@@ -435,13 +442,14 @@
                 padding: 1.8rem;
                 margin-top: 100px;
             }
+
             .floating-call-btn {
                 padding: 0.8rem 1.2rem;
                 bottom: 20px;
                 right: 20px;
                 font-size: 0.8rem;
             }
-            
+
             /* Responsive Price Badge */
             .price-badge-container {
                 padding: 0.5rem 1.2rem;
@@ -452,10 +460,12 @@
                 justify-content: center;
                 box-sizing: border-box;
             }
+
             .price-badge-label {
                 font-size: 0.75rem;
                 white-space: nowrap;
             }
+
             .price-badge-original {
                 font-size: 0.95rem;
                 white-space: nowrap;
@@ -467,10 +477,12 @@
                 transform: scale(0.9);
                 box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7);
             }
+
             70% {
                 transform: scale(1.1);
                 box-shadow: 0 0 0 6px rgba(57, 255, 20, 0);
             }
+
             100% {
                 transform: scale(0.9);
                 box-shadow: 0 0 0 0 rgba(57, 255, 20, 0);
@@ -478,6 +490,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="bg-grid"></div>
     <div class="bg-glow"></div>
@@ -496,9 +509,9 @@
     <!-- Main Registration Box -->
     <main class="register-container">
         <span class="badge-enroll">Official Premium Vault Access</span>
-        
+
         <h1 class="gold-gradient register-title" id="guideHeadingTitle">Unlock Premium Guide</h1>
-        
+
         <p class="register-desc">Complete your details below to unlock this VIP vault resource.</p>
 
         <!-- Price Badge -->
@@ -541,7 +554,8 @@
                     </select>
                     <div class="input-wrapper" style="flex-grow: 1;">
                         <i data-lucide="phone"></i>
-                        <input type="tel" id="phoneNumber" maxlength="10" inputmode="numeric" pattern="[0-9]*" class="input-field phone-input" placeholder="Enter your phone number" required>
+                        <input type="tel" id="phoneNumber" maxlength="10" inputmode="numeric" pattern="[0-9]*"
+                            class="input-field phone-input" placeholder="Enter your phone number" required>
                     </div>
                 </div>
             </div>
@@ -552,16 +566,22 @@
                 <div class="coupon-wrapper" style="display: flex; gap: 10px; width: 100%; align-items: stretch;">
                     <div class="input-wrapper" style="flex-grow: 1;">
                         <i data-lucide="tag"></i>
-                        <input type="text" id="couponCode" class="input-field" placeholder="Enter coupon code" style="text-transform: uppercase;">
+                        <input type="text" id="couponCode" class="input-field" placeholder="Enter coupon code"
+                            style="text-transform: uppercase;">
                     </div>
-                    <button type="button" id="applyCouponBtn" class="btn-prime" style="border-radius: 12px; font-size: 0.95rem; font-weight: 800; padding: 0.9rem 2.5rem; letter-spacing: 0.5px; white-space: nowrap;">
+                    <button type="button" id="applyCouponBtn" class="btn-prime"
+                        style="border-radius: 12px; font-size: 0.95rem; font-weight: 800; padding: 0.9rem 2.5rem; letter-spacing: 0.5px; white-space: nowrap;">
                         Apply
                     </button>
                 </div>
-                <div id="couponHint" style="font-size: 0.8rem; color: var(--gray); margin-top: 0.4rem; text-align: left; opacity: 0.8;">
-                    Use coupon code: <span style="color: var(--gold); font-weight: 800; letter-spacing: 1px;">FIRST200</span>
+                <div id="couponHint"
+                    style="font-size: 0.8rem; color: var(--gray); margin-top: 0.4rem; text-align: left; opacity: 0.8;">
+                    Use coupon code: <span
+                        style="color: var(--gold); font-weight: 800; letter-spacing: 1px;">FIRST200</span>
                 </div>
-                <div id="couponStatus" style="font-size: 0.85rem; display: none; margin-top: 0.4rem; font-weight: 700; text-align: left; letter-spacing: 0.5px;"></div>
+                <div id="couponStatus"
+                    style="font-size: 0.85rem; display: none; margin-top: 0.4rem; font-weight: 700; text-align: left; letter-spacing: 0.5px;">
+                </div>
             </div>
 
             <!-- Checkbox Option -->
@@ -585,27 +605,37 @@
             <p class="footer-note">Upon registration, you will be redirected to the Google Drive link immediately.</p>
 
             <!-- Social Proof Indicator (Upgraded Live Ticker) -->
-            <div id="liveTickerContainer" 
-                 onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.5), 0 0 25px rgba(212,175,55,0.1)'; this.style.borderColor='rgba(212, 175, 55, 0.45)';" 
-                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 175, 55, 0.05)'; this.style.borderColor='rgba(212, 175, 55, 0.25)';"
-                 style="background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 16px; padding: 1rem 1.2rem; margin-top: 1.2rem; width: 100%; box-sizing: border-box; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 175, 55, 0.05); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: default; min-height: 85px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
-                
+            <div id="liveTickerContainer"
+                onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.5), 0 0 25px rgba(212,175,55,0.1)'; this.style.borderColor='rgba(212, 175, 55, 0.45)';"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 175, 55, 0.05)'; this.style.borderColor='rgba(212, 175, 55, 0.25)';"
+                style="background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 16px; padding: 1rem 1.2rem; margin-top: 1.2rem; width: 100%; box-sizing: border-box; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 175, 55, 0.05); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: default; min-height: 85px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+
                 <!-- Inner Ticker Content wrapper with transition class -->
-                <div id="liveTickerContent" style="display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1; transform: translateY(0); width: 100%;">
+                <div id="liveTickerContent"
+                    style="display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1; transform: translateY(0); width: 100%;">
                     <!-- Default initial message -->
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <div class="avatar-stack" style="display: flex; align-items: center; margin-right: 4px;">
-                            <span style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #FFD700, #B8860B); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #000; margin-right: -8px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">A</span>
-                            <span style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #1E90FF, #00008B); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #fff; margin-right: -8px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">R</span>
-                            <span style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #00FA9A, #2E8B57); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #fff; z-index: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">M</span>
+                            <span
+                                style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #FFD700, #B8860B); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #000; margin-right: -8px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">A</span>
+                            <span
+                                style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #1E90FF, #00008B); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #fff; margin-right: -8px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">R</span>
+                            <span
+                                style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #00FA9A, #2E8B57); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #fff; z-index: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">M</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 6px; background: rgba(57, 255, 20, 0.08); border: 1px solid rgba(57, 255, 20, 0.25); padding: 0.25rem 0.65rem; border-radius: 50px;">
-                            <span class="pulse-dot" style="width: 6px; height: 6px; background-color: #39FF14; border-radius: 50%; display: inline-block; animation: pulse-green 1.5s infinite; box-shadow: 0 0 8px #39FF14;"></span>
-                            <span style="font-size: 0.6rem; color: #39FF14; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Live Activity</span>
+                        <div
+                            style="display: flex; align-items: center; gap: 6px; background: rgba(57, 255, 20, 0.08); border: 1px solid rgba(57, 255, 20, 0.25); padding: 0.25rem 0.65rem; border-radius: 50px;">
+                            <span class="pulse-dot"
+                                style="width: 6px; height: 6px; background-color: #39FF14; border-radius: 50%; display: inline-block; animation: pulse-green 1.5s infinite; box-shadow: 0 0 8px #39FF14;"></span>
+                            <span
+                                style="font-size: 0.6rem; color: #39FF14; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Live
+                                Activity</span>
                         </div>
                     </div>
-                    <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; line-height: 1.5; letter-spacing: 0.2px;">
-                        <strong style="color: var(--white);">1,000 traders</strong> online right now & <strong style="color: var(--gold);">100+</strong> joined today
+                    <span
+                        style="font-size: 0.78rem; color: var(--gray); font-weight: 700; line-height: 1.5; letter-spacing: 0.2px;">
+                        <strong style="color: var(--white);">1,000 traders</strong> online right now & <strong
+                            style="color: var(--gold);">100+</strong> joined today
                     </span>
                 </div>
             </div>
@@ -614,7 +644,8 @@
 
 
     <!-- Footer -->
-    <footer class="footer-unique" style="padding: 2rem 5%; background-color: var(--navy-deep); border-top: 1px solid rgba(255,255,255,0.03); text-align: center; font-size: 0.8rem; color: var(--gray); z-index: 10;">
+    <footer class="footer-unique"
+        style="padding: 2rem 5%; background-color: var(--navy-deep); border-top: 1px solid rgba(255,255,255,0.03); text-align: center; font-size: 0.8rem; color: var(--gray); z-index: 10;">
         <p>&copy; 2026 PrimeVerse. Designed for Serious Traders. All rights reserved.</p>
     </footer>
 
@@ -651,6 +682,18 @@
             finalTitle = guide.title.replace(/<br\s*\/?>/gi, ' ');
             originalPriceVal = guide.originalPrice;
             discountPriceVal = guide.discountPrice;
+
+            // Customize button and footer for Execution Journal
+            if (guide.id === "2") {
+                const submitBtnText = document.querySelector('.btn-register-submit');
+                const footerNoteText = document.querySelector('.footer-note');
+                if (submitBtnText) {
+                    submitBtnText.innerHTML = `Open Execution Journal <i data-lucide="arrow-right"></i>`;
+                }
+                if (footerNoteText) {
+                    footerNoteText.textContent = "Upon registration, you will be redirected to the Execution Journal immediately.";
+                }
+            }
         }
         document.getElementById('guideHeadingTitle').textContent = ` ${finalTitle}`;
         document.title = `PrimeVerse | Register to View ${finalTitle}`;
@@ -678,22 +721,22 @@
 
         applyCouponBtn.addEventListener('click', () => {
             const enteredCode = couponInput.value.trim().toUpperCase();
-            
+
             if (enteredCode === "FIRST200") {
                 couponApplied = true;
                 couponStatus.style.display = "block";
                 couponStatus.style.color = "#D3AF37"; // Neon green
                 couponStatus.textContent = "Coupon 'FIRST200' applied successfully! 100% Discount.";
-                
+
                 // Hide coupon hint
                 document.getElementById('couponHint').style.display = "none";
-                
+
                 // Update price badge to free state
                 badgeLabel.textContent = "Discount Price:";
                 badgeOriginalPrice.style.display = "inline-block";
                 badgeDiscountPrice.innerHTML = `${discountPriceVal} <span class="free-pill" style="animation: pulse-glow 2s infinite; font-size: 0.65rem; padding: 0.1rem 0.4rem; vertical-align: middle; margin-left: 4px;">FREE</span>`;
                 document.getElementById('priceBadgeContainer').classList.add('discount-applied');
-                
+
                 // Disable input and button
                 couponInput.disabled = true;
                 applyCouponBtn.disabled = true;
@@ -707,7 +750,7 @@
                 couponStatus.style.display = "block";
                 couponStatus.style.color = "var(--red)";
                 couponStatus.textContent = "Invalid coupon code.";
-                
+
                 // Reset to default price
                 badgeLabel.textContent = "Amount Payable:";
                 badgeOriginalPrice.style.display = "none";
@@ -727,7 +770,7 @@
                 couponInput.focus();
                 return;
             }
-            
+
             // Collect form data
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('emailAddress').value;
@@ -743,7 +786,13 @@
 
             // Prepare dynamic redirect function
             const performRedirect = () => {
-                if (guide && guide.driveLink) {
+                if (fullName) {
+                    localStorage.setItem('userName', fullName);
+                }
+                if (guide && guide.id === "2") {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = 'execution-journal.html?login=true&name=' + encodeURIComponent(fullName);
+                } else if (guide && guide.driveLink) {
                     window.location.href = guide.driveLink;
                 } else {
                     window.location.href = 'index.html';
@@ -852,7 +901,7 @@
             <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; line-height: 1.5; letter-spacing: 0.2px;">
                 <strong style="color: var(--white);">1,000 traders</strong> online right now & <strong style="color: var(--gold);">100+</strong> joined today
             </span>`,
-            
+
             // Message 2 (Real-time unlock alert A)
             `<div style="display: flex; align-items: center; gap: 10px;">
                 <div style="display: flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 0.25rem 0.65rem; border-radius: 50px;">
@@ -863,7 +912,7 @@
             <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; line-height: 1.5; letter-spacing: 0.2px;">
                 <strong style="color: var(--white);">Aman S</strong> just unlocked the <strong style="color: var(--gold);">Beginner Trading Roadmap</strong>!
             </span>`,
-            
+
             // Message 3 (Real-time unlock alert B)
             `<div style="display: flex; align-items: center; gap: 10px;">
                 <div style="display: flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 0.25rem 0.65rem; border-radius: 50px;">
@@ -896,14 +945,14 @@
             // Slide and fade out
             tickerWrapper.style.opacity = 0;
             tickerWrapper.style.transform = 'translateY(-8px)';
-            
+
             setTimeout(() => {
                 currentTickerIndex = (currentTickerIndex + 1) % tickerMessages.length;
                 tickerWrapper.innerHTML = tickerMessages[currentTickerIndex];
-                
+
                 // Re-initialize dynamic Lucide icons inside ticker HTML
                 lucide.createIcons();
-                
+
                 // Slide and fade back in
                 tickerWrapper.style.opacity = 1;
                 tickerWrapper.style.transform = 'translateY(0)';
@@ -911,4 +960,5 @@
         }, 4000);
     </script>
 </body>
+
 </html>
