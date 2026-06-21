@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/login.png">
+    <title>PrimeVerse | VIP PDF Viewer</title>
+    
+    <!-- Google Fonts & Satoshi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* PDF Viewer Layout */
+        body {
+            background-color: var(--navy-deep);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Bar Styling matching navigation */
+        .viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4%;
+            background: rgba(13, 21, 33, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .viewer-logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .pdf-title-container {
+            text-align: center;
+            flex-grow: 1;
+            padding: 0 2rem;
+            max-width: 600px;
+        }
+
+        .pdf-active-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Satoshi', sans-serif;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .pdf-subtitle {
+            font-size: 0.65rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .viewer-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-viewer-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--gray);
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-viewer-back:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .btn-viewer-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #000;
+            background: var(--gold);
+            font-weight: 800;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.15);
+        }
+
+        .btn-viewer-download:hover {
+            background: #e5bd42;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212,175,55,0.3);
+        }
+
+        /* Viewport Container */
+        .viewer-main {
+            flex-grow: 1;
+            position: relative;
+            background: var(--navy-deep);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            z-index: 10;
+        }
+
+        .pdf-frame-wrapper {
+            width: 100%;
+            height: 100%;
+            max-width: 1100px;
+            background: #111a28;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pdf-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 5;
+            position: relative;
+        }
+
+        /* Loading Spinner */
+        .loading-shimmer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0d1521;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--gold);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .loading-text {
+            color: var(--gray);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .pdf-title-container {
+                display: none;
+            }
+            .viewer-header {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+
+    <!-- Viewer Navigation Header -->
+    <header class="viewer-header">
+        <a href="index.html" class="viewer-logo-section">
+            <img src="assets/login.png" alt="PrimeVerse Logo" style="height: 35px; display: block;">
+            <div class="logo-info">
+                <div class="logo-text" style="font-size: 1.1rem;">PRIME<span class="gold-text">VERSE</span></div>
+            </div>
+        </a>
+
+        <div class="pdf-title-container">
+            <div class="pdf-active-title" id="pdfHeaderTitle">Loading Document...</div>
+            <div class="pdf-subtitle">PrimeVerse VIP Vault</div>
+        </div>
+
+        <div class="viewer-actions">
+            <a href="index.html" class="btn-viewer-back">
+                <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+                Back
+            </a>
+            <a href="#" class="btn-viewer-download" id="downloadPdfBtn" download>
+                <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                Download
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Viewport -->
+    <main class="viewer-main">
+        <div class="pdf-frame-wrapper">
+            <!-- Loading Indicator -->
+            <div class="loading-shimmer" id="loadingIndicator">
+                <div class="spinner"></div>
+                <div class="loading-text">Loading secure PDF document...</div>
+            </div>
+
+            <!-- PDF Embed -->
+            <iframe class="pdf-iframe" id="pdfIframe" src="" allow="autoplay"></iframe>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // Mapping of allowed filenames to title displays
+        const allowedFiles = {
+            'Trading Plan.pdf.pdf': 'Trading Plan & Blueprint Guide',
+            'SL-HIT-TO-TP.pdf': 'SL Hit to TP Management Guide',
+            'GOAL.pdf.pdf': 'Goal Setting Action Blueprint'
+        };
+
+        // Parse query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const requestFile = urlParams.get('file');
+
+        // Resolve requested file, default to 'Trading Plan.pdf.pdf' if empty or invalid
+        let finalFile = 'Trading Plan.pdf.pdf';
+        let finalTitle = allowedFiles[finalFile];
+
+        if (requestFile && allowedFiles[requestFile]) {
+            finalFile = requestFile;
+            finalTitle = allowedFiles[requestFile];
+        }
+
+        // Setup File Paths
+        const absolutePdfPath = `pdf/${finalFile}`;
+
+        // Update Back Button Link
+        const backBtn = document.querySelector('.btn-viewer-back');
+        const sourceId = urlParams.get('id');
+        if (sourceId) {
+            backBtn.href = `index.html?id=${sourceId}`;
+        } else {
+            if (finalFile === 'Trading Plan.pdf.pdf') {
+                backBtn.href = 'index.html?id=1';
+            } else if (finalFile === 'SL-HIT-TO-TP.pdf') {
+                backBtn.href = 'index.html?id=2';
+            } else if (finalFile === 'GOAL.pdf.pdf') {
+                backBtn.href = 'index.html?id=3';
+            } else {
+                backBtn.href = 'index.html';
+            }
+        }
+
+        // Populate elements
+        document.title = `PrimeVerse | ${finalTitle}`;
+        document.getElementById('pdfHeaderTitle').textContent = finalTitle;
+        document.getElementById('downloadPdfBtn').href = absolutePdfPath;
+
+        // Load PDF in iframe
+        const iframe = document.getElementById('pdfIframe');
+        iframe.src = absolutePdfPath;
+
+        // Hide loading indicator when PDF loads
+        iframe.addEventListener('load', () => {
+            // Give a tiny buffer for native rendering to begin
+            setTimeout(() => {
+                const loader = document.getElementById('loadingIndicator');
+                loader.style.opacity = 0;
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 300);
+        });
+    </script>
+</body>
+</html>
