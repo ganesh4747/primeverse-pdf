@@ -5,13 +5,14 @@ const CONFIG = {
         {
             id: "1",
             badgeText: "VIP ARCHITECTURE",
-            title: "Trading Plan<br>& Blueprint",
+            title: "Beginner Trading Roadmap",
             author: "GANESH KUMAR",
             detailsTitle: 'The Ultimate <br> <span class="gold-text">Trading Plan</span> Manual',
             description: "Stop trading randomly. This detailed guide reveals the exact architectural framework used to identify patterns, manage high-leverage risk, and align entries systematically with long-term execution consistency.",
             originalPrice: "INR ₹999",
             discountPrice: "INR ₹0",
             driveLink: "https://drive.google.com/file/d/1juxE7t24gmPKs6jnmtg_KvBJv4b39s9h/view?usp=drive_link",
+            tableName: "Beginner Trading Roadmap",
             ctaId: "ctaTradingPlan",
             alternate: false,
             // SVG line chart coordinates for book cover
@@ -22,13 +23,14 @@ const CONFIG = {
         {
             id: "2",
             badgeText: "SYSTEM GUIDE",
-            title: "SL Hit To<br>TP Management",
+            title: "Trading journal template",
             author: "GANESH KUMAR",
-            detailsTitle: 'Mastering <br> <span class="gold-text">SL Hit to TP</span> Psychology',
+            detailsTitle: 'Mastering <br> <span class="gold-text">Trading journal template</span>',
             description: "Eliminate emotional trading errors. Learn the psychological framework and mathematical logic required to process stop losses cleanly, protect capital, and hold trades patiently until they hit your take-profit targets.",
             originalPrice: "INR ₹999",
             discountPrice: "INR ₹0",
             driveLink: "https://drive.google.com/file/d/YOUR_DRIVE_FILE_ID_2/view?usp=sharing",
+            tableName: "Trading journal template",
             ctaId: "ctaSlTp",
             alternate: true,
             // SVG line chart coordinates for book cover
@@ -46,6 +48,7 @@ const CONFIG = {
             originalPrice: "INR ₹999",
             discountPrice: "INR ₹0",
             driveLink: "https://drive.google.com/file/d/YOUR_DRIVE_FILE_ID_3/view?usp=sharing",
+            tableName: "goal_setting_leads",
             ctaId: "ctaGoal",
             alternate: false,
             // SVG line chart coordinates for book cover
@@ -53,5 +56,11 @@ const CONFIG = {
             circleCx: "100",
             circleCy: "5"
         }
-    ]
+    ],
+    // Supabase Configuration block. Replace with your actual database details!
+    supabase: {
+        url: "https://syjsyoqhgwtuskbzrald.supabase.co",
+        anonKey: "sb_publishable_B5D2lqYKeXpR9QgsY-IJLQ_LCR9Ssjv",
+        masterTable: "all_leads"
+    }
 };

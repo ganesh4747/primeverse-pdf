@@ -18,6 +18,8 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="config.js"></script>
+    <!-- Supabase JS Client SDK -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 
     <style>
         body {
@@ -627,6 +629,19 @@
         // Find guide in config
         const guide = CONFIG.guides.find(g => g.id === idParam);
 
+        // Initialize Supabase Client dynamically
+        let supabaseClient = null;
+        if (typeof window.supabase !== 'undefined' && CONFIG.supabase && CONFIG.supabase.url && CONFIG.supabase.url !== "YOUR_SUPABASE_URL" && CONFIG.supabase.anonKey && CONFIG.supabase.anonKey !== "YOUR_SUPABASE_ANON_KEY") {
+            try {
+                const createClientFunc = window.supabase.createClient;
+                if (createClientFunc) {
+                    supabaseClient = createClientFunc(CONFIG.supabase.url, CONFIG.supabase.anonKey);
+                }
+            } catch (err) {
+                console.error("Failed to initialize Supabase client:", err);
+            }
+        }
+
         // Resolve title and initial prices
         let finalTitle = "Premium Resource Guide";
         let originalPriceVal = "INR ₹999";
@@ -637,7 +652,7 @@
             originalPriceVal = guide.originalPrice;
             discountPriceVal = guide.discountPrice;
         }
-        document.getElementById('guideHeadingTitle').textContent = `Unlock ${finalTitle}`;
+        document.getElementById('guideHeadingTitle').textContent = ` ${finalTitle}`;
         document.title = `PrimeVerse | Register to View ${finalTitle}`;
 
         // Populate initial price state
@@ -702,7 +717,7 @@
         });
 
         // Handle form submission
-        document.getElementById('registrationForm').addEventListener('submit', (e) => {
+        document.getElementById('registrationForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
             if (!couponApplied) {
@@ -718,14 +733,106 @@
             const email = document.getElementById('emailAddress').value;
             const countryCode = document.getElementById('countryCode').value;
             const phone = document.getElementById('phoneNumber').value;
-            const isWhatsappSame = document.getElementById('whatsappSame').checked;
+            const fullPhone = `${countryCode} ${phone}`;
 
-            // Redirect immediately to the Google Drive link
-            if (guide && guide.driveLink) {
-                window.location.href = guide.driveLink;
+            // Show loading state on the button
+            const submitBtn = document.querySelector('.btn-register-submit');
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `Processing... <span class="pulse-dot" style="width: 6px; height: 6px; background-color: var(--gold); border-radius: 50%; display: inline-block; animation: pulse-green 1.5s infinite; box-shadow: 0 0 8px var(--gold);"></span>`;
+
+            // Prepare dynamic redirect function
+            const performRedirect = () => {
+                if (guide && guide.driveLink) {
+                    window.location.href = guide.driveLink;
+                } else {
+                    window.location.href = 'index.html';
+                }
+            };
+
+            // If Supabase is initialized, save user details to database tables
+            if (supabaseClient) {
+                const masterTableName = (CONFIG.supabase && CONFIG.supabase.masterTable) || 'all_leads';
+                const guideTableName = guide ? guide.tableName : null;
+                const guideId = guide ? guide.id : 'unknown';
+
+                try {
+                    const promises = [];
+
+                    // 1. Check if user already registered for this specific guide in Master Table
+                    const { data: existingMaster, error: masterCheckError } = await supabaseClient
+                        .from(masterTableName)
+                        .select('id')
+                        .eq('email', email)
+                        .eq('guide_id', guideId)
+                        .limit(1);
+
+                    if (masterCheckError) {
+                        console.error("Master check error:", masterCheckError);
+                    }
+
+                    const shouldInsertMaster = !existingMaster || existingMaster.length === 0;
+
+                    if (shouldInsertMaster) {
+                        const payloadMaster = {
+                            full_name: fullName,
+                            email: email,
+                            phone: fullPhone,
+                            guide_id: guideId,
+                            guide_title: finalTitle
+                        };
+                        promises.push(
+                            supabaseClient
+                                .from(masterTableName)
+                                .insert([payloadMaster])
+                        );
+                    } else {
+                        console.log(`User ${email} already registered for guide ${guideId} in Master table.`);
+                    }
+
+                    // 2. Check if user already exists in the Guide-Specific Table
+                    if (guideTableName) {
+                        const { data: existingGuide, error: guideCheckError } = await supabaseClient
+                            .from(guideTableName)
+                            .select('id')
+                            .eq('email', email)
+                            .limit(1);
+
+                        if (guideCheckError) {
+                            console.error("Guide check error:", guideCheckError);
+                        }
+
+                        const shouldInsertGuide = !existingGuide || existingGuide.length === 0;
+
+                        if (shouldInsertGuide) {
+                            const payloadGuide = {
+                                full_name: fullName,
+                                email: email,
+                                phone: fullPhone
+                            };
+                            promises.push(
+                                supabaseClient
+                                    .from(guideTableName)
+                                    .insert([payloadGuide])
+                            );
+                        } else {
+                            console.log(`User ${email} already exists in guide-specific table ${guideTableName}.`);
+                        }
+                    }
+
+                    // Run the inserts (if any were pushed)
+                    if (promises.length > 0) {
+                        await Promise.all(promises);
+                    }
+                } catch (dbError) {
+                    console.error("Database operation error:", dbError);
+                }
             } else {
-                window.location.href = 'index.html';
+                console.warn("Supabase client not initialized. Skipping database storage.");
             }
+
+            // Always redirect to Google Drive link so user gets access
+            performRedirect();
         });
 
         // Upgraded Live Ticker Loop
