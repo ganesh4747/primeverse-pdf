@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/login.png">
+    <title>PrimeVerse | Register for Access</title>
+    
+    <!-- Google Fonts & Satoshi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            background-color: var(--navy-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .register-container {
+            max-width: 550px;
+            margin: 120px auto 40px;
+            padding: 3rem 2.5rem;
+            width: 90%;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(212, 175, 55, 0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .badge-enroll {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .register-title {
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .register-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        /* Price tag container */
+        .price-badge-container {
+            background: linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(212,175,55,0.05) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            padding: 0.7rem 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0 auto;
+            font-family: 'Satoshi', sans-serif;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .price-badge-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-badge-original {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: line-through;
+            position: relative;
+        }
+
+        .price-badge-free {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            animation: smooth-blink 1.5s infinite ease-in-out;
+        }
+
+        @keyframes smooth-blink {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            }
+            50% {
+                opacity: 0.35;
+                text-shadow: 0 0 2px rgba(212, 175, 55, 0.1);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 6px rgba(212, 175, 55, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+
+        /* Form styling */
+        .register-form {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-wrapper i,
+        .input-wrapper svg {
+            position: absolute;
+            left: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            width: 18px;
+            height: 18px;
+            pointer-events: none;
+            transition: color 0.3s;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--white);
+            font-size: 0.95rem;
+            font-family: 'Satoshi', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .input-wrapper:focus-within i {
+            color: var(--gold);
+        }
+
+        /* Phone field specific */
+        .phone-wrapper {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        .country-select {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--white);
+            padding: 0 1rem;
+            font-size: 0.95rem;
+            font-family: 'Satoshi', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            outline: none;
+            white-space: nowrap;
+        }
+
+        .country-select:focus {
+            border-color: var(--gold);
+        }
+
+        .country-select option {
+            background: var(--navy-dark);
+            color: var(--white);
+        }
+
+        .phone-input {
+            flex-grow: 1;
+        }
+
+        /* Checkbox styling */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--gray);
+            user-select: none;
+            margin-top: 0.2rem;
+        }
+
+        .checkbox-container input {
+            display: none;
+        }
+
+        .custom-checkmark {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.02);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .checkbox-container:hover .custom-checkmark {
+            border-color: var(--gold);
+        }
+
+        .checkbox-container input:checked + .custom-checkmark {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .custom-checkmark svg {
+            width: 12px;
+            height: 12px;
+            stroke: #000;
+            stroke-width: 3.5;
+            display: none;
+        }
+
+        .checkbox-container input:checked + .custom-checkmark svg {
+            display: block;
+        }
+
+        /* Submit action block */
+        .btn-register-submit {
+            width: 100%;
+            padding: 1.1rem;
+            font-size: 1rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn-register-submit i,
+        .btn-register-submit svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s;
+        }
+
+        .btn-register-submit:hover i,
+        .btn-register-submit:hover svg {
+            transform: translateX(4px);
+        }
+
+        .footer-note {
+            color: rgba(142, 154, 175, 0.6);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* Floating Call Help Button */
+        .floating-call-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gold);
+            color: #000 !important;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 100;
+            border: none;
+            cursor: pointer;
+        }
+
+        .floating-call-btn:hover {
+            background: #e5bd42;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .floating-call-btn i {
+            width: 16px;
+            height: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .register-container {
+                padding: 1.8rem;
+                margin-top: 100px;
+            }
+            .floating-call-btn {
+                padding: 0.8rem 1.2rem;
+                bottom: 20px;
+                right: 20px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <!-- Navigation Header -->
+    <nav class="nav-unique">
+        <a href="index.html" class="logo-wrap">
+            <img src="assets/login.png" alt="PrimeVerse Logo" style="height: 40px; display: block;">
+            <div class="logo-info">
+                <div class="logo-text">PRIME<span class="gold-text">VERSE</span></div>
+                <div class="logo-tagline">CLARITY • DISCIPLINE • CONSISTENCY</div>
+            </div>
+        </a>
+        <div class="nav-content-desktop">
+            <div class="nav-links">
+                <a href="index.html">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Registration Box -->
+    <main class="register-container">
+        <span class="badge-enroll">Official Premium Vault Access</span>
+        
+        <h1 class="gold-gradient register-title" id="guideHeadingTitle">Unlock Premium Guide</h1>
+        
+        <p class="register-desc">Complete your details below to unlock this VIP vault resource.</p>
+
+        <!-- Registration Form -->
+        <form class="register-form" id="registrationForm">
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <div class="input-wrapper">
+                    <i data-lucide="user"></i>
+                    <input type="text" id="fullName" class="input-field" placeholder="Enter your name" required>
+                </div>
+            </div>
+
+            <!-- Email Address -->
+            <div class="form-group">
+                <label for="emailAddress">Email Address</label>
+                <div class="input-wrapper">
+                    <i data-lucide="mail"></i>
+                    <input type="email" id="emailAddress" class="input-field" placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <div class="phone-wrapper">
+                    <select class="country-select" id="countryCode">
+                        <option value="+91">🇮🇳 +91</option>
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+971">🇦🇪 +971</option>
+                        <option value="+61">🇦🇺 +61</option>
+                    </select>
+                    <div class="input-wrapper" style="flex-grow: 1;">
+                        <i data-lucide="phone"></i>
+                        <input type="tel" id="phoneNumber" maxlength="10" inputmode="numeric" pattern="[0-9]*" class="input-field phone-input" placeholder="Enter your phone number" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkbox Option -->
+            <label class="checkbox-container">
+                <input type="checkbox" id="whatsappSame" checked>
+                <span class="custom-checkmark">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </span>
+                WhatsApp number is same as phone
+            </label>
+
+            <!-- Register Button -->
+            <button type="submit" class="btn-prime btn-register-submit">
+                Open PDF
+                <i data-lucide="arrow-right"></i>
+            </button>
+
+            <!-- Price Badge -->
+            <div class="price-badge-container">
+                <span class="price-badge-label">Discount Price:</span>
+                <span class="price-badge-original">INR ₹999</span>
+                <span class="price-badge-free">INR ₹0 <span class="free-pill" style="animation: pulse-glow 2s infinite; font-size: 0.65rem; padding: 0.1rem 0.4rem; vertical-align: middle; margin-left: 4px;">FREE</span></span>
+            </div>
+
+            <!-- Footer terms note -->
+            <p class="footer-note">Upon registration, you will be redirected to the secure PDF viewer immediately.</p>
+        </form>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer-unique" style="padding: 2rem 5%; background-color: var(--navy-deep); border-top: 1px solid rgba(255,255,255,0.03); text-align: center; font-size: 0.8rem; color: var(--gray); z-index: 10;">
+        <p>&copy; 2026 PrimeVerse. Designed for Serious Traders. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Allowed guides mapping
+        const allowedGuides = {
+            '1': 'Trading Plan & Blueprint',
+            '2': 'SL Hit To TP Management',
+            '3': "Trader's Goal Setting Guide"
+        };
+
+        // Parse query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const idParam = urlParams.get('id');
+
+        // Resolve title
+        let finalTitle = "Premium Resource Guide";
+        if (idParam && allowedGuides[idParam]) {
+            finalTitle = allowedGuides[idParam];
+        }
+        document.getElementById('guideHeadingTitle').textContent = `Unlock ${finalTitle}`;
+        document.title = `PrimeVerse | Register to View ${finalTitle}`;
+
+        // Only allow numbers in the phone number field
+        const phoneInput = document.getElementById('phoneNumber');
+        phoneInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Mapping from ID to PDF file names
+        const guideFiles = {
+            '1': 'Trading Plan.pdf.pdf',
+            '2': 'SL-HIT-TO-TP.pdf',
+            '3': 'GOAL.pdf.pdf'
+        };
+
+        // Handle form submission
+        document.getElementById('registrationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Collect form data
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('emailAddress').value;
+            const countryCode = document.getElementById('countryCode').value;
+            const phone = document.getElementById('phoneNumber').value;
+            const isWhatsappSame = document.getElementById('whatsappSame').checked;
+
+            // Redirect immediately to pdf.html with the correct file parameter
+            let targetFile = 'Trading Plan.pdf.pdf'; // default fallback
+            if (idParam && guideFiles[idParam]) {
+                targetFile = guideFiles[idParam];
+            }
+            window.location.href = `pdf.html?file=${encodeURIComponent(targetFile)}`;
+        });
+    </script>
+</body>
+</html>

@@ -277,27 +277,39 @@
         // Setup File Paths
         const absolutePdfPath = `pdf/${finalFile}`;
 
-        // Update Back Button Link
-        const backBtn = document.querySelector('.btn-viewer-back');
-        const sourceId = urlParams.get('id');
-        if (sourceId) {
-            backBtn.href = `index.html?id=${sourceId}`;
-        } else {
-            if (finalFile === 'Trading Plan.pdf.pdf') {
-                backBtn.href = 'index.html?id=1';
-            } else if (finalFile === 'SL-HIT-TO-TP.pdf') {
-                backBtn.href = 'index.html?id=2';
-            } else if (finalFile === 'GOAL.pdf.pdf') {
-                backBtn.href = 'index.html?id=3';
-            } else {
-                backBtn.href = 'index.html';
-            }
-        }
-
         // Populate elements
         document.title = `PrimeVerse | ${finalTitle}`;
         document.getElementById('pdfHeaderTitle').textContent = finalTitle;
-        document.getElementById('downloadPdfBtn').href = absolutePdfPath;
+        
+        // Direct download handler forcing browser download behavior
+        document.getElementById('downloadPdfBtn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                const response = await fetch(absolutePdfPath);
+                if (!response.ok) throw new Error('Network error');
+                const blob = await response.blob();
+                // Wrap in octet-stream to bypass browser inline preview behavior
+                const forcedBlob = new Blob([blob], { type: 'application/octet-stream' });
+                const blobUrl = window.URL.createObjectURL(forcedBlob);
+                
+                const tempLink = document.createElement('a');
+                tempLink.href = blobUrl;
+                tempLink.download = finalFile;
+                document.body.appendChild(tempLink);
+                tempLink.click();
+                document.body.removeChild(tempLink);
+                window.URL.revokeObjectURL(blobUrl);
+            } catch (err) {
+                // Fallback for local filesystem file:// protocol limits
+                const tempLink = document.createElement('a');
+                tempLink.href = absolutePdfPath;
+                tempLink.download = finalFile;
+                tempLink.target = '_blank';
+                document.body.appendChild(tempLink);
+                tempLink.click();
+                document.body.removeChild(tempLink);
+            }
+        });
 
         // Load PDF in iframe
         const iframe = document.getElementById('pdfIframe');
