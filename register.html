@@ -17,6 +17,7 @@
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="config.js"></script>
 
     <style>
         body {
@@ -78,37 +79,113 @@
             background: linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(212,175,55,0.05) 100%);
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 50px;
-            padding: 0.7rem 1.8rem;
+            padding: 1.1rem 2.8rem;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            margin: 0 auto;
+            gap: 18px;
+            margin: 0 auto 2.2rem;
             font-family: 'Satoshi', sans-serif;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: badge-glow 2.5s infinite alternate ease-in-out;
+        }
+
+        .price-badge-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 80px;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-20deg);
+            animation: badge-shine 3.5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes badge-shine {
+            0% {
+                left: -150%;
+            }
+            45%, 100% {
+                left: 150%;
+            }
+        }
+
+        @keyframes badge-glow {
+            0% {
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25), 0 0 15px rgba(212, 175, 55, 0.2), inset 0 0 8px rgba(212, 175, 55, 0.05);
+                border-color: rgba(212, 175, 55, 0.3);
+            }
+            100% {
+                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 35px rgba(212, 175, 55, 0.65), inset 0 0 15px rgba(212, 175, 55, 0.2);
+                border-color: rgba(212, 175, 55, 0.7);
+            }
         }
 
         .price-badge-label {
-            font-size: 0.75rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: var(--white);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .price-badge-original {
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 900;
             color: rgba(255, 255, 255, 0.4);
-            text-decoration: line-through;
             position: relative;
+            display: inline-block;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .price-badge-original::after {
+            content: '';
+            position: absolute;
+            left: -2px;
+            right: -2px;
+            top: 52%;
+            height: 2px;
+            background: var(--red);
+            transform: translateY(-50%) rotate(-4deg);
+            box-shadow: 0 0 8px var(--red-glow);
         }
 
         .price-badge-free {
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: var(--gold);
             text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
             animation: smooth-blink 1.5s infinite ease-in-out;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Discount Applied state (smaller/standard size) */
+        .price-badge-container.discount-applied {
+            padding: 0.7rem 1.8rem;
+            gap: 12px;
+            margin: 0 auto 2rem;
+            animation: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .price-badge-container.discount-applied .price-badge-label {
+            font-size: 0.90rem;
+            letter-spacing: 1px;
+        }
+
+        .price-badge-container.discount-applied .price-badge-free {
+            font-size: 1.4rem;
         }
 
         @keyframes smooth-blink {
@@ -362,6 +439,40 @@
                 right: 20px;
                 font-size: 0.8rem;
             }
+            
+            /* Responsive Price Badge */
+            .price-badge-container {
+                padding: 0.5rem 1.2rem;
+                gap: 8px 12px;
+                border-radius: 30px;
+                max-width: 100%;
+                flex-wrap: wrap;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+            .price-badge-label {
+                font-size: 0.75rem;
+                white-space: nowrap;
+            }
+            .price-badge-original {
+                font-size: 0.95rem;
+                white-space: nowrap;
+            }
+        }
+
+        @keyframes pulse-green {
+            0% {
+                transform: scale(0.9);
+                box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 6px rgba(57, 255, 20, 0);
+            }
+            100% {
+                transform: scale(0.9);
+                box-shadow: 0 0 0 0 rgba(57, 255, 20, 0);
+            }
         }
     </style>
 </head>
@@ -378,11 +489,6 @@
                 <div class="logo-tagline">CLARITY • DISCIPLINE • CONSISTENCY</div>
             </div>
         </a>
-        <div class="nav-content-desktop">
-            <div class="nav-links">
-                <a href="index.html">Back to Home</a>
-            </div>
-        </div>
     </nav>
 
     <!-- Main Registration Box -->
@@ -392,6 +498,13 @@
         <h1 class="gold-gradient register-title" id="guideHeadingTitle">Unlock Premium Guide</h1>
         
         <p class="register-desc">Complete your details below to unlock this VIP vault resource.</p>
+
+        <!-- Price Badge -->
+        <div class="price-badge-container" id="priceBadgeContainer">
+            <span class="price-badge-label" id="badgeLabel">Amount Payable:</span>
+            <span class="price-badge-original" id="badgeOriginalPrice" style="display: none;">INR ₹999</span>
+            <span class="price-badge-free" id="badgeDiscountPrice">INR ₹999</span>
+        </div>
 
         <!-- Registration Form -->
         <form class="register-form" id="registrationForm">
@@ -431,6 +544,24 @@
                 </div>
             </div>
 
+            <!-- Coupon Code -->
+            <div class="form-group">
+                <label for="couponCode">Coupon Code</label>
+                <div class="coupon-wrapper" style="display: flex; gap: 10px; width: 100%; align-items: stretch;">
+                    <div class="input-wrapper" style="flex-grow: 1;">
+                        <i data-lucide="tag"></i>
+                        <input type="text" id="couponCode" class="input-field" placeholder="Enter coupon code" style="text-transform: uppercase;">
+                    </div>
+                    <button type="button" id="applyCouponBtn" class="btn-prime" style="border-radius: 12px; font-size: 0.95rem; font-weight: 800; padding: 0.9rem 2.5rem; letter-spacing: 0.5px; white-space: nowrap;">
+                        Apply
+                    </button>
+                </div>
+                <div id="couponHint" style="font-size: 0.8rem; color: var(--gray); margin-top: 0.4rem; text-align: left; opacity: 0.8;">
+                    Use coupon code: <span style="color: var(--gold); font-weight: 800; letter-spacing: 1px;">FIRST200</span>
+                </div>
+                <div id="couponStatus" style="font-size: 0.85rem; display: none; margin-top: 0.4rem; font-weight: 700; text-align: left; letter-spacing: 0.5px;"></div>
+            </div>
+
             <!-- Checkbox Option -->
             <label class="checkbox-container">
                 <input type="checkbox" id="whatsappSame" checked>
@@ -448,15 +579,34 @@
                 <i data-lucide="arrow-right"></i>
             </button>
 
-            <!-- Price Badge -->
-            <div class="price-badge-container">
-                <span class="price-badge-label">Discount Price:</span>
-                <span class="price-badge-original">INR ₹999</span>
-                <span class="price-badge-free">INR ₹0 <span class="free-pill" style="animation: pulse-glow 2s infinite; font-size: 0.65rem; padding: 0.1rem 0.4rem; vertical-align: middle; margin-left: 4px;">FREE</span></span>
-            </div>
-
             <!-- Footer terms note -->
-            <p class="footer-note">Upon registration, you will be redirected to the secure PDF viewer immediately.</p>
+            <p class="footer-note">Upon registration, you will be redirected to the Google Drive link immediately.</p>
+
+            <!-- Social Proof Indicator (Upgraded Live Ticker) -->
+            <div id="liveTickerContainer" 
+                 onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.5), 0 0 25px rgba(212,175,55,0.1)'; this.style.borderColor='rgba(212, 175, 55, 0.45)';" 
+                 onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 175, 55, 0.05)'; this.style.borderColor='rgba(212, 175, 55, 0.25)';"
+                 style="background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 16px; padding: 1rem 1.2rem; margin-top: 1.2rem; width: 100%; box-sizing: border-box; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 175, 55, 0.05); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: default; min-height: 85px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                
+                <!-- Inner Ticker Content wrapper with transition class -->
+                <div id="liveTickerContent" style="display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; transition: opacity 0.5s ease, transform 0.5s ease; opacity: 1; transform: translateY(0); width: 100%;">
+                    <!-- Default initial message -->
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div class="avatar-stack" style="display: flex; align-items: center; margin-right: 4px;">
+                            <span style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #FFD700, #B8860B); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #000; margin-right: -8px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">A</span>
+                            <span style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #1E90FF, #00008B); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #fff; margin-right: -8px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">R</span>
+                            <span style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #00FA9A, #2E8B57); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #fff; z-index: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">M</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px; background: rgba(57, 255, 20, 0.08); border: 1px solid rgba(57, 255, 20, 0.25); padding: 0.25rem 0.65rem; border-radius: 50px;">
+                            <span class="pulse-dot" style="width: 6px; height: 6px; background-color: #39FF14; border-radius: 50%; display: inline-block; animation: pulse-green 1.5s infinite; box-shadow: 0 0 8px #39FF14;"></span>
+                            <span style="font-size: 0.6rem; color: #39FF14; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Live Activity</span>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; line-height: 1.5; letter-spacing: 0.2px;">
+                        <strong style="color: var(--white);">1,000 traders</strong> online right now & <strong style="color: var(--gold);">100+</strong> joined today
+                    </span>
+                </div>
+            </div>
         </form>
     </main>
 
@@ -468,25 +618,37 @@
 
     <script>
         lucide.createIcons();
-
-        // Allowed guides mapping
-        const allowedGuides = {
-            '1': 'Trading Plan & Blueprint',
-            '2': 'SL Hit To TP Management',
-            '3': "Trader's Goal Setting Guide"
-        };
+        let couponApplied = false;
 
         // Parse query parameter
         const urlParams = new URLSearchParams(window.location.search);
         const idParam = urlParams.get('id');
 
-        // Resolve title
+        // Find guide in config
+        const guide = CONFIG.guides.find(g => g.id === idParam);
+
+        // Resolve title and initial prices
         let finalTitle = "Premium Resource Guide";
-        if (idParam && allowedGuides[idParam]) {
-            finalTitle = allowedGuides[idParam];
+        let originalPriceVal = "INR ₹999";
+        let discountPriceVal = "INR ₹0";
+
+        if (guide) {
+            finalTitle = guide.title.replace(/<br\s*\/?>/gi, ' ');
+            originalPriceVal = guide.originalPrice;
+            discountPriceVal = guide.discountPrice;
         }
         document.getElementById('guideHeadingTitle').textContent = `Unlock ${finalTitle}`;
         document.title = `PrimeVerse | Register to View ${finalTitle}`;
+
+        // Populate initial price state
+        const badgeLabel = document.getElementById('badgeLabel');
+        const badgeOriginalPrice = document.getElementById('badgeOriginalPrice');
+        const badgeDiscountPrice = document.getElementById('badgeDiscountPrice');
+
+        badgeLabel.textContent = "Amount Payable:";
+        badgeOriginalPrice.style.display = "none";
+        badgeOriginalPrice.textContent = originalPriceVal;
+        badgeDiscountPrice.textContent = originalPriceVal; // Show original price initially
 
         // Only allow numbers in the phone number field
         const phoneInput = document.getElementById('phoneNumber');
@@ -494,16 +656,62 @@
             e.target.value = e.target.value.replace(/\D/g, '');
         });
 
-        // Mapping from ID to PDF file names
-        const guideFiles = {
-            '1': 'Trading Plan.pdf.pdf',
-            '2': 'SL-HIT-TO-TP.pdf',
-            '3': 'GOAL.pdf.pdf'
-        };
+        // Apply Coupon logic
+        const applyCouponBtn = document.getElementById('applyCouponBtn');
+        const couponInput = document.getElementById('couponCode');
+        const couponStatus = document.getElementById('couponStatus');
+
+        applyCouponBtn.addEventListener('click', () => {
+            const enteredCode = couponInput.value.trim().toUpperCase();
+            
+            if (enteredCode === "FIRST200") {
+                couponApplied = true;
+                couponStatus.style.display = "block";
+                couponStatus.style.color = "#D3AF37"; // Neon green
+                couponStatus.textContent = "Coupon 'FIRST200' applied successfully! 100% Discount.";
+                
+                // Hide coupon hint
+                document.getElementById('couponHint').style.display = "none";
+                
+                // Update price badge to free state
+                badgeLabel.textContent = "Discount Price:";
+                badgeOriginalPrice.style.display = "inline-block";
+                badgeDiscountPrice.innerHTML = `${discountPriceVal} <span class="free-pill" style="animation: pulse-glow 2s infinite; font-size: 0.65rem; padding: 0.1rem 0.4rem; vertical-align: middle; margin-left: 4px;">FREE</span>`;
+                document.getElementById('priceBadgeContainer').classList.add('discount-applied');
+                
+                // Disable input and button
+                couponInput.disabled = true;
+                applyCouponBtn.disabled = true;
+                applyCouponBtn.style.opacity = "0.5";
+                applyCouponBtn.style.cursor = "not-allowed";
+            } else if (enteredCode === "") {
+                couponStatus.style.display = "block";
+                couponStatus.style.color = "var(--red)";
+                couponStatus.textContent = "Please enter a coupon code.";
+            } else {
+                couponStatus.style.display = "block";
+                couponStatus.style.color = "var(--red)";
+                couponStatus.textContent = "Invalid coupon code.";
+                
+                // Reset to default price
+                badgeLabel.textContent = "Amount Payable:";
+                badgeOriginalPrice.style.display = "none";
+                badgeDiscountPrice.textContent = originalPriceVal;
+                document.getElementById('priceBadgeContainer').classList.remove('discount-applied');
+            }
+        });
 
         // Handle form submission
         document.getElementById('registrationForm').addEventListener('submit', (e) => {
             e.preventDefault();
+
+            if (!couponApplied) {
+                couponStatus.style.display = "block";
+                couponStatus.style.color = "var(--red)";
+                couponStatus.textContent = "Please apply a valid coupon code to unlock this premium guide.";
+                couponInput.focus();
+                return;
+            }
             
             // Collect form data
             const fullName = document.getElementById('fullName').value;
@@ -512,13 +720,88 @@
             const phone = document.getElementById('phoneNumber').value;
             const isWhatsappSame = document.getElementById('whatsappSame').checked;
 
-            // Redirect immediately to pdf.html with the correct file parameter
-            let targetFile = 'Trading Plan.pdf.pdf'; // default fallback
-            if (idParam && guideFiles[idParam]) {
-                targetFile = guideFiles[idParam];
+            // Redirect immediately to the Google Drive link
+            if (guide && guide.driveLink) {
+                window.location.href = guide.driveLink;
+            } else {
+                window.location.href = 'index.html';
             }
-            window.location.href = `pdf.html?file=${encodeURIComponent(targetFile)}`;
         });
+
+        // Upgraded Live Ticker Loop
+        const tickerMessages = [
+            // Message 1 (Live User Count)
+            `<div style="display: flex; align-items: center; gap: 10px;">
+                <div class="avatar-stack" style="display: flex; align-items: center; margin-right: 4px;">
+                    <span style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #FFD700, #B8860B); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #000; margin-right: -8px; z-index: 3; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">A</span>
+                    <span style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #1E90FF, #00008B); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #fff; margin-right: -8px; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">R</span>
+                    <span style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #00FA9A, #2E8B57); border: 2px solid var(--navy-dark); font-size: 0.55rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; color: #fff; z-index: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">M</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; background: rgba(57, 255, 20, 0.08); border: 1px solid rgba(57, 255, 20, 0.25); padding: 0.25rem 0.65rem; border-radius: 50px;">
+                    <span class="pulse-dot" style="width: 6px; height: 6px; background-color: #39FF14; border-radius: 50%; display: inline-block; animation: pulse-green 1.5s infinite; box-shadow: 0 0 8px #39FF14;"></span>
+                    <span style="font-size: 0.6rem; color: #39FF14; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Live Activity</span>
+                </div>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; line-height: 1.5; letter-spacing: 0.2px;">
+                <strong style="color: var(--white);">1,000 traders</strong> online right now & <strong style="color: var(--gold);">100+</strong> joined today
+            </span>`,
+            
+            // Message 2 (Real-time unlock alert A)
+            `<div style="display: flex; align-items: center; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 0.25rem 0.65rem; border-radius: 50px;">
+                    <i data-lucide="zap" style="width: 12px; height: 12px; color: var(--gold);"></i>
+                    <span style="font-size: 0.6rem; color: var(--gold); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Recently Unlocked</span>
+                </div>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; line-height: 1.5; letter-spacing: 0.2px;">
+                <strong style="color: var(--white);">Aman S</strong> just unlocked the <strong style="color: var(--gold);">Beginner Trading Roadmap</strong>!
+            </span>`,
+            
+            // Message 3 (Real-time unlock alert B)
+            `<div style="display: flex; align-items: center; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 0.25rem 0.65rem; border-radius: 50px;">
+                    <i data-lucide="zap" style="width: 12px; height: 12px; color: var(--gold);"></i>
+                    <span style="font-size: 0.6rem; color: var(--gold); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Recently Unlocked</span>
+                </div>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; line-height: 1.5; letter-spacing: 0.2px;">
+                <strong style="color: var(--white);">Gokul D</strong> just unlocked the <strong style="color: var(--gold);">Beginner Trading Roadmap</strong>!
+            </span>`,
+
+            // Message 4 (Real-time unlock alert C)
+            `<div style="display: flex; align-items: center; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 0.25rem 0.65rem; border-radius: 50px;">
+                    <i data-lucide="zap" style="width: 12px; height: 12px; color: var(--gold);"></i>
+                    <span style="font-size: 0.6rem; color: var(--gold); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;">Recently Unlocked</span>
+                </div>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--gray); font-weight: 700; line-height: 1.5; letter-spacing: 0.2px;">
+                <strong style="color: var(--white);">Arun M </strong> just unlocked the <strong style="color: var(--gold);">Beginner Trading Roadmap</strong>!
+            </span>`
+        ];
+
+        let currentTickerIndex = 0;
+        const tickerWrapper = document.getElementById('liveTickerContent');
+
+        setInterval(() => {
+            if (couponApplied) return; // Stop showing ticker when successfully unlocked
+
+            // Slide and fade out
+            tickerWrapper.style.opacity = 0;
+            tickerWrapper.style.transform = 'translateY(-8px)';
+            
+            setTimeout(() => {
+                currentTickerIndex = (currentTickerIndex + 1) % tickerMessages.length;
+                tickerWrapper.innerHTML = tickerMessages[currentTickerIndex];
+                
+                // Re-initialize dynamic Lucide icons inside ticker HTML
+                lucide.createIcons();
+                
+                // Slide and fade back in
+                tickerWrapper.style.opacity = 1;
+                tickerWrapper.style.transform = 'translateY(0)';
+            }, 500);
+        }, 4000);
     </script>
 </body>
 </html>

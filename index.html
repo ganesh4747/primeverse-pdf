@@ -17,6 +17,7 @@
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="config.js"></script>
 
     <style>
         /* Custom Overrides & Additions for Premium Preview Experience */
@@ -541,173 +542,8 @@
             <p style="color: var(--gray); font-size: 0.95rem;">The resource you are trying to access does not exist or the link is invalid.</p>
         </div>
 
-        <!-- Showcase 1: Trading Plan & Blueprint -->
-        <div class="main-showcase-grid" id="section-1" style="display: none;">
-            <!-- Left: Book cover mockup -->
-            <div class="book-container">
-                <div class="book-card" onclick="triggerCta('ctaTradingPlan')">
-                    <div class="book-inner-grid"></div>
-                    <div class="book-card-header">
-                        <span class="book-vip-tag">VIP ARCHITECTURE</span>
-                        <h2 class="book-card-title">Trading Plan<br>& Blueprint</h2>
-                    </div>
-                    
-                    <div class="book-card-chart">
-                        <svg class="book-card-chart-svg" viewBox="0 0 100 50">
-                            <path d="M 0,40 L 15,35 L 30,45 L 50,15 L 65,30 L 80,5 L 100,20" />
-                            <circle cx="80" cy="5" r="2.5" fill="var(--gold)" />
-                        </svg>
-                    </div>
-
-                    <div class="book-card-footer">
-                        <span class="book-author">GANESH KUMAR</span>
-                        <i data-lucide="shield-check" style="color: var(--gold); width: 20px;"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Description, pricing, and button -->
-            <div class="details-panel">
-                <h2 class="details-title">
-                    The Ultimate <br>
-                    <span class="gold-text">Trading Plan</span> Manual
-                </h2>
-                <p class="details-desc">
-                    Stop trading randomly. This detailed guide reveals the exact architectural framework used to identify patterns, manage high-leverage risk, and align entries systematically with long-term execution consistency.
-                </p>
-
-                <!-- Pricing Block -->
-                <div class="pricing-block">
-                    <div class="price-item">
-                        <span class="price-label">Regular Price</span>
-                        <div class="price-value-original">INR ₹999</div>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">Your Price</span>
-                        <div class="price-value-free">
-                            INR ₹0
-                            <span class="free-pill">FREE</span>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="pdf.html?file=Trading Plan.pdf.pdf" class="btn-prime" id="ctaTradingPlan" style="width: 100%; text-align: center;">
-                    Unlock & Open PDF
-                </a>
-            </div>
-        </div>
-
-        <!-- Showcase 2: SL Hit to TP Management -->
-        <div class="main-showcase-grid alternate" id="section-2" style="display: none;">
-            <!-- Left: Book cover mockup -->
-            <div class="book-container">
-                <div class="book-card" onclick="triggerCta('ctaSlTp')">
-                    <div class="book-inner-grid"></div>
-                    <div class="book-card-header">
-                        <span class="book-vip-tag">SYSTEM GUIDE</span>
-                        <h2 class="book-card-title">SL Hit To<br>TP Management</h2>
-                    </div>
-                    
-                    <div class="book-card-chart">
-                        <svg class="book-card-chart-svg" viewBox="0 0 100 50">
-                            <path d="M 0,15 L 20,10 L 40,35 L 55,32 L 80,5 L 100,8" />
-                            <circle cx="80" cy="5" r="2.5" fill="var(--gold)" />
-                        </svg>
-                    </div>
-
-                    <div class="book-card-footer">
-                        <span class="book-author">GANESH KUMAR</span>
-                        <i data-lucide="shield-check" style="color: var(--gold); width: 20px;"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Description, pricing, and button -->
-            <div class="details-panel">
-                <h2 class="details-title">
-                    Mastering <br>
-                    <span class="gold-text">SL Hit to TP</span> Psychology
-                </h2>
-                <p class="details-desc">
-                    Eliminate emotional trading errors. Learn the psychological framework and mathematical logic required to process stop losses cleanly, protect capital, and hold trades patiently until they hit your take-profit targets.
-                </p>
-
-                <!-- Pricing Block -->
-                <div class="pricing-block">
-                    <div class="price-item">
-                        <span class="price-label">Regular Price</span>
-                        <div class="price-value-original">INR ₹999</div>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">Your Price</span>
-                        <div class="price-value-free">
-                            INR ₹0
-                            <span class="free-pill">FREE</span>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="pdf.html?file=SL-HIT-TO-TP.pdf" class="btn-prime" id="ctaSlTp" style="width: 100%; text-align: center;">
-                    Unlock & Open PDF
-                </a>
-            </div>
-        </div>
-
-        <!-- Showcase 3: Goal Setting Action Blueprint -->
-        <div class="main-showcase-grid" id="section-3" style="display: none;">
-            <!-- Left: Book cover mockup -->
-            <div class="book-container">
-                <div class="book-card" onclick="triggerCta('ctaGoal')">
-                    <div class="book-inner-grid"></div>
-                    <div class="book-card-header">
-                        <span class="book-vip-tag">ACTION BLUEPRINT</span>
-                        <h2 class="book-card-title">Trader's Goal<br>Setting Guide</h2>
-                    </div>
-                    
-                    <div class="book-card-chart">
-                        <svg class="book-card-chart-svg" viewBox="0 0 100 50">
-                            <path d="M 0,45 L 20,35 L 40,38 L 60,25 L 80,12 L 100,5" />
-                            <circle cx="100" cy="5" r="2.5" fill="var(--gold)" />
-                        </svg>
-                    </div>
-
-                    <div class="book-card-footer">
-                        <span class="book-author">GANESH KUMAR</span>
-                        <i data-lucide="shield-check" style="color: var(--gold); width: 20px;"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Description, pricing, and button -->
-            <div class="details-panel">
-                <h2 class="details-title">
-                    The Strategic <br>
-                    <span class="gold-text">Goal Setting</span> Blueprint
-                </h2>
-                <p class="details-desc">
-                    Structure your path to consistency. Build a routine-driven routine, define key trading milestones, establish a habit tracking process, and align daily actions with long-term execution growth.
-                </p>
-
-                <!-- Pricing Block -->
-                <div class="pricing-block">
-                    <div class="price-item">
-                        <span class="price-label">Regular Price</span>
-                        <div class="price-value-original">INR ₹999</div>
-                    </div>
-                    <div class="price-item">
-                        <span class="price-label">Your Price</span>
-                        <div class="price-value-free">
-                            INR ₹0
-                            <span class="free-pill">FREE</span>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="pdf.html?file=GOAL.pdf.pdf" class="btn-prime" id="ctaGoal" style="width: 100%; text-align: center;">
-                    Unlock & Open PDF
-                </a>
-            </div>
-        </div>
+        <!-- Dynamic Showcase Container -->
+        <div id="dynamic-showcase-container"></div>
     </main>
 
     <!-- Simple Premium Footer -->
@@ -724,22 +560,77 @@
         const sectionId = urlParams.get('id');
         const registered = urlParams.get('registered');
 
+        // Check if the guide exists in configuration
+        const guide = CONFIG.guides.find(g => g.id === sectionId);
+
         // Redirect to registration page if not registered yet
-        if (!registered && (sectionId === '1' || sectionId === '2' || sectionId === '3')) {
+        if (!registered && guide) {
             window.location.href = `register.html?id=${sectionId}`;
         }
 
-        const s1 = document.getElementById('section-1');
-        const s2 = document.getElementById('section-2');
-        const s3 = document.getElementById('section-3');
+        const container = document.getElementById('dynamic-showcase-container');
         const invalidMsg = document.getElementById('invalid-link-message');
 
-        if (sectionId === '1') {
-            s1.style.display = 'grid';
-        } else if (sectionId === '2') {
-            s2.style.display = 'grid';
-        } else if (sectionId === '3') {
-            s3.style.display = 'grid';
+        if (guide) {
+            // Render the showcase HTML dynamically based on the CONFIG guide data
+            container.innerHTML = `
+                <div class="main-showcase-grid ${guide.alternate ? 'alternate' : ''}" id="section-${guide.id}">
+                    <!-- Left: Book cover mockup -->
+                    <div class="book-container">
+                        <div class="book-card" onclick="triggerCta('${guide.ctaId}')">
+                            <div class="book-inner-grid"></div>
+                            <div class="book-card-header">
+                                <span class="book-vip-tag">${guide.badgeText}</span>
+                                <h2 class="book-card-title">${guide.title}</h2>
+                            </div>
+                            
+                            <div class="book-card-chart">
+                                <svg class="book-card-chart-svg" viewBox="0 0 100 50">
+                                    <path d="${guide.chartPath}" />
+                                    <circle cx="${guide.circleCx}" cy="${guide.circleCy}" r="2.5" fill="var(--gold)" />
+                                </svg>
+                            </div>
+
+                            <div class="book-card-footer">
+                                <span class="book-author">${guide.author}</span>
+                                <i data-lucide="shield-check" style="color: var(--gold); width: 20px;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Description, pricing, and button -->
+                    <div class="details-panel">
+                        <h2 class="details-title">
+                            ${guide.detailsTitle}
+                        </h2>
+                        <p class="details-desc">
+                            ${guide.description}
+                        </p>
+
+                        <!-- Pricing Block -->
+                        <div class="pricing-block">
+                            <div class="price-item">
+                                <span class="price-label">Regular Price</span>
+                                <div class="price-value-original">${guide.originalPrice}</div>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Your Price</span>
+                                <div class="price-value-free">
+                                    ${guide.discountPrice}
+                                    <span class="free-pill">FREE</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="${guide.driveLink}" target="_blank" class="btn-prime" id="${guide.ctaId}" style="width: 100%; text-align: center;">
+                            Unlock & Open PDF
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            // Re-run lucide to render dynamic icons
+            lucide.createIcons();
         } else {
             invalidMsg.style.display = 'block';
         }
@@ -761,7 +652,8 @@
 
         // Trigger CTA when card is clicked
         function triggerCta(id) {
-            document.getElementById(id).click();
+            const el = document.getElementById(id);
+            if (el) el.click();
         }
     </script>
 </body>

@@ -17,6 +17,7 @@
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="config.js"></script>
 
     <style>
         /* PDF Viewer Layout */
@@ -254,24 +255,23 @@
     <script>
         lucide.createIcons();
 
-        // Mapping of allowed filenames to title displays
-        const allowedFiles = {
-            'Trading Plan.pdf.pdf': 'Trading Plan & Blueprint Guide',
-            'SL-HIT-TO-TP.pdf': 'SL Hit to TP Management Guide',
-            'GOAL.pdf.pdf': 'Goal Setting Action Blueprint'
-        };
-
         // Parse query parameter
         const urlParams = new URLSearchParams(window.location.search);
         const requestFile = urlParams.get('file');
 
-        // Resolve requested file, default to 'Trading Plan.pdf.pdf' if empty or invalid
-        let finalFile = 'Trading Plan.pdf.pdf';
-        let finalTitle = allowedFiles[finalFile];
+        // Find guide in CONFIG by filename
+        const guide = CONFIG.guides.find(g => g.filename === requestFile);
 
-        if (requestFile && allowedFiles[requestFile]) {
-            finalFile = requestFile;
-            finalTitle = allowedFiles[requestFile];
+        // Fallback to first guide in CONFIG if file parameter is missing or invalid
+        const defaultGuide = CONFIG.guides[0] || { filename: 'Trading Plan.pdf.pdf', title: 'Trading Plan & Blueprint Guide' };
+
+        let finalFile = defaultGuide.filename;
+        // Resolve title (cleaning any <br> tags or HTML wrappers)
+        let finalTitle = (defaultGuide.detailsTitle || defaultGuide.title).replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]*>/g, '');
+
+        if (guide) {
+            finalFile = guide.filename;
+            finalTitle = (guide.detailsTitle || guide.title).replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]*>/g, '');
         }
 
         // Setup File Paths
